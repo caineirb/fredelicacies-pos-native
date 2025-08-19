@@ -16,6 +16,7 @@ export const Colors = {
       selectedBackground: '#FBD50880',
       content: '#60604A'
     },
+    border: '#dcdddfff'
   },
   dark: {
     text: '#ECEDEE',
@@ -26,5 +27,6 @@ export const Colors = {
       selectedBackground: '#FBD50880',
       content: '#60604A'
     },
+    border: '#dcdddfff'
   },
 };

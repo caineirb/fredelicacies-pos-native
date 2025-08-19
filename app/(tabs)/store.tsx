@@ -2,95 +2,20 @@ import ItemCard from '@/components/ui/ItemCard';
 import OrdersModal from '@/components/ui/OrdersModal';
 import SearchBar from '@/components/ui/SearchBar';
 import { Colors } from '@/constants/Colors';
+import { Item, tempItems } from '@/constants/items';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, FlatList, ScaledSize, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
 
-export interface Item {
-  id: string;
-  name: string;
-  price: number;
-  image: any;
-  stock: number;
-}
 
-const items: Item[] = [
-  {
-    id: '1',
-    name: 'Sample Item 1',
-    price: 9.99,
-    image: require('@/assets/images/sampleItem.jpg'),
-    stock: 5,
-  },
-  {
-    id: '2',
-    name: 'Sample Item 2',
-    price: 14.99,
-    image: require('@/assets/images/sampleItem.jpg'),
-    stock: 30,
-  },
-  {
-    id: '3',
-    name: 'Sample Item 3',
-    price: 7.49,
-    image: require('@/assets/images/sampleItem.jpg'),
-    stock: 25,
-  },
-  {
-    id: '4',
-    name: 'Sample Item 4',
-    price: 12.99,
-    image: require('@/assets/images/sampleItem.jpg'),
-    stock: 40,
-  },
-  {
-    id: '5',
-    name: 'Sample Item 5',
-    price: 3.00,
-    image: require('@/assets/images/sampleItem.jpg'),
-    stock: 100,
-  },
-  {
-    id: '6',
-    name: 'Sample Item 6',
-    price: 30.00,
-    image: require('@/assets/images/sampleItem.jpg'),
-    stock: 15,
-  },
-  {
-    id: '7',
-    name: 'Sample Item 7',
-    price: 7.49,
-    image: require('@/assets/images/sampleItem.jpg'),
-    stock: 60,
-  },
-  {
-    id: '8',
-    name: 'Sample Item 8',
-    price: 12.99,
-    image: require('@/assets/images/sampleItem.jpg'),
-    stock: 35,
-  },
-  {
-    id: '9',
-    name: 'Sample Item 9',
-    price: 3.00,
-    image: require('@/assets/images/sampleItem.jpg'),
-    stock: 80,
-  },
-  {
-    id: '10',
-    name: 'Sample Item 10',
-    price: 30.00,
-    image: require('@/assets/images/sampleItem.jpg'),
-    stock: 20,
-  },
-];
+
+
 
 const Store = () => {
   const colorScheme = useColorScheme();
+  const [items, setItems] = useState<Item[]>(tempItems);
   const [numColumns, setNumColumns] = useState(2);
   const [screenData, setScreenData] = useState(Dimensions.get('window'));
   const [searchItem, setSearchItem] = useState('');
@@ -149,7 +74,7 @@ const Store = () => {
         position: 'top',
         visibilityTime: 3000,
         autoHide: true,
-        topOffset: 50,
+        topOffset: 60,
       });
     }
   };
@@ -178,7 +103,7 @@ const Store = () => {
         position: 'top',
         visibilityTime: 3000,
         autoHide: true,
-        topOffset: 50,
+        topOffset: 60,
       });
     }
   };
@@ -206,7 +131,6 @@ const Store = () => {
       top: 80,
       left: 16,
       right: 16,
-      zIndex: 1,
       backgroundColor: 'white',
       borderRadius: 8,
       paddingHorizontal: 16,

@@ -2,16 +2,12 @@ import ItemCard from '@/components/ui/ItemCard';
 import OrdersModal from '@/components/ui/OrdersModal';
 import SearchBar from '@/components/ui/SearchBar';
 import { Colors } from '@/constants/Colors';
-import { Item, tempItems } from '@/constants/items';
+import { Item, tempItems } from '@/constants/Items';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, FlatList, ScaledSize, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Toast from 'react-native-toast-message';
-
-
-
-
 
 const Store = () => {
   const colorScheme = useColorScheme();

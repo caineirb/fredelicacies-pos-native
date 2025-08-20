@@ -1,4 +1,4 @@
-import { Item } from '@/app/(tabs)/store';
+import { Item } from '@/constants/Items';
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 

@@ -1,10 +1,12 @@
 import CategoryIndicator from '@/components/ui/CategoryIndicator';
+import InventoryCard from '@/components/ui/InventoryCard';
 import { Colors } from '@/constants/Colors';
-import { Item, tempItems } from '@/constants/items';
+import { Item, tempItems } from '@/constants/Items';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 const tempCategories = [
   { color: "#FF6347", name: "Fruits", count: 3 },
   { color: "#3CB371", name: "Vegetables", count: 1 },
@@ -18,13 +20,25 @@ const Inventory = () => {
   const styles = createStyles(colorScheme);
   const [items, setItems] = useState<Item[]>(tempItems);
   
+  const renderInventoryItem = ({ item }: { item: Item }) => (
+    <InventoryCard
+      name={item.name}
+      price={item.price}
+      cost={10}
+      stock={item.stock}
+      icon={item.image}
+      onAction={() => {}}
+    />
+  );
+  
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.categoryArea}>
+      {/* Categories Section */}
+      <View style={styles.categoriesSection}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>Categories</Text>
           <TouchableOpacity 
-            style={styles.categoryAddButton}
+            style={styles.addButton}
             onPress={() => {}}
           >
             <Text style={styles.buttonText}>+ Add Category</Text>
@@ -42,85 +56,115 @@ const Inventory = () => {
           ))}
         </View>
       </View>
-      <View>
+
+      {/* Inventory Section */}
+      <View style={styles.inventorySection}>
         <View style={styles.headerContainer}>
           <Text style={styles.headerText}>Inventory</Text>
           <TouchableOpacity 
-            style={styles.categoryAddButton}
+            style={styles.addButton}
             onPress={() => {}}
           >
             <Text style={styles.buttonText}>+ Add Item</Text>
           </TouchableOpacity>
         </View>
-      <View>
+        
         <FlatList
           data={items}
           keyExtractor={item => item.id}
           numColumns={1}
-          key={`flatlist-1-cols`}
-          renderItem={({ item }) => (
-            <View style={{ flex: 1, maxWidth: '48%' }}>
-              {item.name.toString()}
-            </View>
-          )}
+          key="inventory-flatlist"
+          renderItem={renderInventoryItem}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ 
-            padding: 16,
-          }}
+          contentContainerStyle={styles.inventoryListContent}
+          ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
         />
       </View>
-      </View>
     </SafeAreaView>
-  )
-}
+  );
+};
+
 export default Inventory;
 
 function createStyles(colorScheme: 'light' | 'dark' | null | undefined) {
   return StyleSheet.create({
     container: {
       flex: 1,
-      flexDirection: 'column',
       backgroundColor: Colors[colorScheme ?? 'light'].background,
     },
+    
+    // Categories Section
+    categoriesSection: {
+      backgroundColor: Colors[colorScheme ?? 'light'].background,
+      borderBottomWidth: 1,
+      borderBottomColor: Colors[colorScheme ?? 'light'].tab.content,
+    },
+    
+    // Header styling
     headerContainer: {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      padding: 16,
+      paddingHorizontal: 16,
+      paddingTop: 16,
+      paddingBottom: 12,
     },
     headerText: {
       color: Colors[colorScheme ?? 'light'].text,
-      fontSize: 20,
-      fontWeight: 'bold',
+      fontSize: 22,
+      fontWeight: '700',
       textAlign: 'left',
     },
-    categoryArea: {
-      flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      alignContent: 'center',
-    },
+    
+    // Category container
     categoryContainer: {
       flexWrap: 'wrap',
       flexDirection: 'row',
       justifyContent: 'flex-start',
-      alignContent: 'flex-start',
-      gap: 16,
+      alignItems: 'flex-start',
+      gap: 12,
       paddingHorizontal: 16,
-      paddingBottom: 16,
-      minHeight: 100,
+      paddingBottom: 20,
+      minHeight: 80,
     },
-    categoryAddButton: {
+    
+    // Inventory Section
+    inventorySection: {
+      flex: 1,
+      backgroundColor: Colors[colorScheme ?? 'light'].background,
+    },
+    
+    // Inventory list styling
+    inventoryListContent: {
+      paddingHorizontal: 16,
+      paddingBottom: 20,
+      paddingTop: 8,
+    },
+    itemSeparator: {
+      height: 8,
+    },
+    
+    // Button styling
+    addButton: {
       backgroundColor: Colors[colorScheme ?? 'light'].tint,
-      borderRadius: 4,
+      borderRadius: 8,
       justifyContent: 'center',
       alignItems: 'center',
-      paddingVertical: 8,
-      paddingHorizontal: 12,
+      paddingVertical: 10,
+      paddingHorizontal: 16,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.1,
+      shadowRadius: 3.84,
+      elevation: 5,
     },
     buttonText: {
       color: 'white',
-      fontWeight: 'bold',
+      fontWeight: '600',
+      fontSize: 14,
     },
   });
 }

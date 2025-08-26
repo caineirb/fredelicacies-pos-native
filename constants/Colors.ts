@@ -19,9 +19,9 @@ export const Colors = {
     border: '#dcdddfff'
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
-    tint: tintColorDark,
+    text: '#60604A',
+    background: '#f0f0f0',
+    tint: tintColorLight,
     tab: {
       defaultBackground: '#ffffff',
       selectedBackground: '#FBD50880',
@@ -29,4 +29,15 @@ export const Colors = {
     },
     border: '#dcdddfff'
   },
+  // dark: {
+  //   text: '#ECEDEE',
+  //   background: '#151718',
+  //   tint: tintColorDark,
+  //   tab: {
+  //     defaultBackground: '#ffffff',
+  //     selectedBackground: '#FBD50880',
+  //     content: '#60604A'
+  //   },
+  //   border: '#dcdddfff'
+  // },
 };
